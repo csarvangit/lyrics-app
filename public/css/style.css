@@ -1,0 +1,23 @@
+.bg-column{
+    position: relative;
+    padding-bottom: 300px; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-title{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+}
+
+.has-error .help-block{
+    color: #78261f;
+}
