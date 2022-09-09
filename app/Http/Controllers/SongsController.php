@@ -173,9 +173,20 @@ class SongsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {        
         $song = Songs::find($id);
-        return view('songs.show',compact('song'));
+
+        $song_data['song']               = $song;
+        $song_data['music_directors']    = MusicDirectors::pluck('name','id');
+        $song_data['singers']            = Singers::pluck('name','id');
+        $song_data['movies']             = Movies::pluck('name','id');
+        $song_data['lyricists']          = Lyricists::pluck('name','id');
+        $song_data['artists']            = Artists::pluck('name','id'); 
+
+
+       // dd($song_data); 
+      
+        return view('songs.show',compact('song_data'));
     }
 
     /**
@@ -186,8 +197,23 @@ class SongsController extends Controller
      */
     public function edit($id)
     {
-        $song = Songs::find($id);
-        return view('songs.edit',compact('song'));
+       
+        $song = Songs::find($id);       
+        
+        $song_data['songs'] = $song;
+        // $song_data['music_directors'] = MusicDirectors::all();
+        // $song_data['movies'] = Movies::all();
+        // $song_data['singers'] = Singers::all();
+        // $song_data['lyricists'] = Lyricists::all();
+        // $song_data['artists'] = Artists::all();
+
+        $song_data['music_directors']    = MusicDirectors::pluck('name','id');
+        $song_data['singers']            = Singers::pluck('name','id');
+        $song_data['movies']             = Movies::pluck('name','id');
+        $song_data['lyricists']          = Lyricists::pluck('name','id');
+        $song_data['artists']            = Artists::pluck('name','id');  
+
+        return view('songs.edit',compact('song_data'));
     }
 
     /**
@@ -200,12 +226,17 @@ class SongsController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'title' => 'required',
-            'artist'=>'required',
-            'body' => 'required',
+            'name'=>'required',
+            'languages'=>'required',
+            'music_directors'=>'required',
+            'singers'=>'required',
+            'movies'=>'required',            
+            'lyricists'=>'required',
+            'artists'=>'required',
+            'lyrics'=>'required'
           ]);
           Songs::find($id)->update($request->all());
-          return redirect()->route('songs')->with('success','Song was successfully updated!');
+          return redirect()->route('songs.index')->with('success','Song was successfully updated!');
     }
 
     /**
@@ -217,6 +248,6 @@ class SongsController extends Controller
     public function destroy($id)
     {
         Songs::find($id)->delete();
-        return redirect()->route('songs')->with('success','Song lyrics was successfully deleted!');
+        return redirect()->route('songs.index')->with('success','Song lyrics was successfully deleted!');
     }
 }

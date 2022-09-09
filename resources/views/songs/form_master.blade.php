@@ -18,7 +18,7 @@
     {{ Form::label('name', 'Song Name') }}
   
     <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
-      {{ Form::text('name', NULL, ['class' =>'form-control', 'id'=>'name', 'placeholder'=>'Song Name']) }}
+      {{ Form::text('name', $song_data['songs']->name ?? null, ['class' =>'form-control', 'id'=>'name', 'placeholder'=>'Song Name']) }}
       {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
@@ -27,7 +27,7 @@
     {{ Form::label('movies', 'Movie Name') }}
   
     <div class="form-group {{ $errors->has('movies') ? 'has-error' : ''}}">
-      {{ Form::select('movies', $song_data['movies'], NULL, ['class' =>'form-control form-select','id'=>'movies', 'placeholder'=>'Please Select Movies']) }}
+      {{ Form::select('movies', $song_data['movies'], $song_data['songs']->movies ?? null, ['class' =>'form-control form-select','id'=>'movies', 'placeholder'=>'Please Select Movies']) }}
       {!! $errors->first('movies', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
@@ -36,7 +36,7 @@
     {{ Form::label('languages', 'Language') }}
   
     <div class="form-group {{ $errors->has('languages') ? 'has-error' : ''}}">
-      {{ Form::select('languages', array('tamil' => 'Tamil', 'english' => 'English'), 'tamil', ['class' =>'form-control form-select','id'=>'languages', 'placeholder'=>'Please Select Language']) }}
+      {{ Form::select('languages', array('tamil' => 'Tamil', 'english' => 'English'), $song_data['songs']->languages ?? null, ['class' =>'form-control form-select','id'=>'languages', 'placeholder'=>'Please Select Language']) }}
       {!! $errors->first('languages', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
@@ -51,7 +51,7 @@
     {{ Form::label('singers', 'Singers') }}
   
     <div class="form-group {{ $errors->has('singers') ? 'has-error' : ''}}">
-      {{ Form::select('singers[]', $song_data['singers'], NULL, ['class' =>'form-control form-select multiselect-opt', 'id'=>'singers', 'data-placeholder'=>'Please Select Singers', 'multiple'=>'multiple']) }}
+      {{ Form::select('singers[]', $song_data['singers'], $song_data['songs']->singers ?? null, ['class' =>'form-control form-select multiselect-opt', 'id'=>'singers', 'data-placeholder'=>'Please Select Singers', 'multiple'=>'multiple']) }}
       {!! $errors->first('singers', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
@@ -61,7 +61,7 @@
     {{ Form::label('artists', 'Artists') }}
   
     <div class="form-group {{ $errors->has('artists') ? 'has-error' : ''}}">
-      {{ Form::select('artists[]', $song_data['artists'], NULL, ['class' =>'form-control form-select multiselect-opt','id'=>'artists', 'data-placeholder'=>'Please Select Artists', 'multiple'=>'multiple']) }}
+      {{ Form::select('artists[]', $song_data['artists'], $song_data['songs']->artists ?? null, ['class' =>'form-control form-select multiselect-opt','id'=>'artists', 'data-placeholder'=>'Please Select Artists', 'multiple'=>'multiple']) }}
       {!! $errors->first('artists', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
@@ -71,7 +71,7 @@
     {{ Form::label('lyricists', 'Lyricists') }}
   
     <div class="form-group {{ $errors->has('lyricists') ? 'has-error' : ''}}">
-      {{ Form::select('lyricists[]', $song_data['lyricists'], NULL, ['class' =>'form-control form-select multiselect-opt','id'=>'lyricists', 'data-placeholder'=>'Please Select Lyricists', 'multiple'=>'multiple']) }}
+      {{ Form::select('lyricists[]', $song_data['lyricists'], $song_data['songs']->lyricists ?? null, ['class' =>'form-control form-select multiselect-opt','id'=>'lyricists', 'data-placeholder'=>'Please Select Lyricists', 'multiple'=>'multiple']) }}
       {!! $errors->first('lyricists', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
@@ -81,7 +81,7 @@
     {{ Form::label('music_directors', 'Music Directors') }}
   
     <div class="form-group {{ $errors->has('music_directors') ? 'has-error' : ''}}">
-      {{ Form::select('music_directors[]', $song_data['music_directors'], NULL, ['class' =>'form-control form-select multiselect-opt','id'=>'music_directors', 'data-placeholder'=>'Please Select Music Directors', 'multiple'=>'multiple']) }}
+      {{ Form::select('music_directors[]', $song_data['music_directors'], $song_data['songs']->music_directors ?? null, ['class' =>'form-control form-select multiselect-opt','id'=>'music_directors', 'data-placeholder'=>'Please Select Music Directors', 'multiple'=>'multiple']) }}
       {!! $errors->first('music_directors', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
@@ -93,7 +93,7 @@
     {{ Form::label('lyrics', 'Song Lyrics') }}
   
     <div class="form-group {{ $errors->has('lyrics') ? 'has-error' : ''}}">
-      {{ Form::textarea('lyrics_source', NULL, ['class' =>'form-control', 'id'=>'lyrics_source', 'data-placeholder'=>'Song Lyrics']) }}
+      {{ Form::textarea('lyrics_source', $song_data['songs']->lyrics ?? null, ['class' =>'form-control', 'id'=>'lyrics_source', 'data-placeholder'=>'Song Lyrics']) }}
       
     </div>
   </div>
@@ -111,7 +111,7 @@
     {{ Form::label('lyrics', 'Song Lyrics') }}
   
     <div class="form-group {{ $errors->has('lyrics') ? 'has-error' : ''}}">
-      {{ Form::textarea('lyrics', NULL, ['class' =>'form-control', 'id'=>'lyrics', 'data-placeholder'=>'Song Lyrics']) }}
+      {{ Form::textarea('lyrics', $song_data['songs']->lyrics ?? null, ['class' =>'form-control', 'id'=>'lyrics', 'data-placeholder'=>'Song Lyrics']) }}
       {!! $errors->first('lyrics', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
