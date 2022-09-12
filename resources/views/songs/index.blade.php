@@ -23,12 +23,6 @@
       </div>
     @endif
 
-    @php
-    /*   echo "<pre>";   
-    print_r($songs_data['music_directors']); exit; */
-    @endphp 
-
-
       <div class="row">
           <div class="col-lg-12">
               <h3>All Songs</h3>
@@ -40,13 +34,11 @@
                               <th>Movie</th>
                               <th>Music By</th>
                               <th>                      
-                                  <a class="btn btn-primary ml-auto" href="{{ url('/admin/songs/create')}}"> <i class="fa fa-plus"></i>  Add Songs</a>
+                                  <a class="btn btn-primary ml-auto" href="{{ url('/admin/songs/create')}}"> <i class="fa fa-plus"></i>  Add Song</a>
                               </th>
                           </tr>
                       </thead>
-                      <tbody>
-
-                      
+                      <tbody>                      
                           @foreach( $songs_data['songs'] as $key => $songs)
                             <tr>
                                 <td>{{ $songs->name }}                               
@@ -83,8 +75,7 @@
  
     
     <div class="d-flex justify-content-between">    
-        {{-- --}}  {{ $songs_data['songs']->links()  }}  
-
+        {{ $songs_data['songs']->links()  }}  
          Showing {{ $songs_data['songs']->firstItem() }} to {{ $songs_data['songs']->lastItem() }} of total {{$songs_data['songs']->total()}} entries 
     </div>
   

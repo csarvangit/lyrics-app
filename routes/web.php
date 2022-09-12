@@ -27,21 +27,13 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//Route::get('/admin/songs', [App\Http\Controllers\SongsController::class, 'index'])->name('songs');
-
-//Route::get('/admin/songs/create', [App\Http\Controllers\SongsController::class, 'create'])->name('songs.create');
-//Route::post('/admin/songs/store', [App\Http\Controllers\SongsController::class, 'store'])->name('songs.store');
-
-//Route::get('/admin/songs/show/{id}', [App\Http\Controllers\SongsController::class, 'show'])->name('songs.show');
-//Route::get('/admin/songs/edit/{id}', [App\Http\Controllers\SongsController::class, 'edit'])->name('songs.edit');
-//Route::patch('/admin/songs/update/{id}', [App\Http\Controllers\SongsController::class, 'update'])->name('songs.update');
-
-//Route::delete('/admin/songs/destroy/{id}', [App\Http\Controllers\SongsController::class, 'destroy'])->name('songs.destroy');
-
-
-//Route::get('/admin/movies/create/', [App\Http\Controllers\MoviesController::class, 'create'])->name('movies.create');
-//Route::post('/admin/movies/store', [App\Http\Controllers\MoviesController::class, 'store'])->name('movies.store');
-
+/*Route::get('/admin/songs', [App\Http\Controllers\SongsController::class, 'index'])->name('songs');
+Route::get('/admin/songs/create', [App\Http\Controllers\SongsController::class, 'create'])->name('songs.create');
+Route::post('/admin/songs/store', [App\Http\Controllers\SongsController::class, 'store'])->name('songs.store');
+Route::get('/admin/songs/show/{id}', [App\Http\Controllers\SongsController::class, 'show'])->name('songs.show');
+Route::get('/admin/songs/edit/{id}', [App\Http\Controllers\SongsController::class, 'edit'])->name('songs.edit');
+Route::patch('/admin/songs/update/{id}', [App\Http\Controllers\SongsController::class, 'update'])->name('songs.update');
+Route::delete('/admin/songs/destroy/{id}', [App\Http\Controllers\SongsController::class, 'destroy'])->name('songs.destroy');*/
 
 Route::resource('/admin/songs', 'App\Http\Controllers\SongsController');
 Route::resource('/admin/movies', 'App\Http\Controllers\MoviesController');

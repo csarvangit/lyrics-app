@@ -42,8 +42,14 @@
                     <div class="col-lg-3 mb-4">
                         <div class="bg-column" style="background-image: url('{{ URL::to('/uploads/music-directors/' .  $value->image_path)  }}');">
 
-                        <div class="bg-title">{{ $value->name }}</div>
+                            <div class="bg-title">{{ $value->name }}</div>
 
+                        </div>
+                        <div class="bg-options text-center mt-2">    
+                            <a class="btn btn-primary btn-sm" href="{{route('music-directors.edit', $value->id)}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            {{ Form::open(['method' => 'DELETE','route' => ['music-directors.destroy', $value->id],'style'=>'display:inline']) }}
+                            <button type="submit" style="display: inline;" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            {{ Form::close() }}
                         </div>
                     </div>
                     @endforeach                      

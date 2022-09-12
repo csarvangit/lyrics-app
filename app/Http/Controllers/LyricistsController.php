@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lyricists;
+use Illuminate\Support\Facades\File;
 
 class LyricistsController extends Controller
 {
@@ -81,7 +82,8 @@ class LyricistsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lyricist = Lyricists::find($id);
+        return view('lyricists.edit', compact('lyricist'));
     }
 
     /**
@@ -93,7 +95,22 @@ class LyricistsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+          ]);
+           
+          $lyricist['name'] = $request->name;
+          
+          if( $request->image_path ){
+            $fileName = time().'.'.$request->image_path->extension();  
+     
+            $request->image_path->move(public_path('uploads/lyricists'), $fileName);    
+            
+            $lyricist['image_path'] = $fileName;  
+          }                   
+
+          Lyricists::find($id)->update($lyricist);
+          return redirect()->route('lyricists.index')->with('Lyricist','Movie was successfully updated!');
     }
 
     /**
@@ -104,6 +121,13 @@ class LyricistsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lyricist = Lyricists::find($id);
+       
+        if(File::exists(public_path('uploads/lyricists/'.$lyricist->image_path))){
+            File::delete(public_path('uploads/lyricists/'.$lyricist->image_path));
+        }
+
+        $lyricist->delete();
+        return redirect()->route('lyricists.index')->with('success','Lyricist was successfully deleted!');
     }
 }

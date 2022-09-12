@@ -21,3 +21,9 @@
 .has-error .help-block{
     color: #78261f;
 }
+
+.thumb-preview{
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+}

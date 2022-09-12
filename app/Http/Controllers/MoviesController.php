@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Movies;
+use Illuminate\Support\Facades\File;
 
 class MoviesController extends Controller
 {
@@ -83,7 +84,8 @@ class MoviesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $movie = Movies::find($id);
+        return view('movies.edit', compact('movie'));
     }
 
     /**
@@ -95,7 +97,22 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+          ]);
+           
+          $movies['name'] = $request->name;
+          
+          if( $request->image_path ){
+            $fileName = time().'.'.$request->image_path->extension();  
+     
+            $request->image_path->move(public_path('uploads/movies'), $fileName);    
+            
+            $movies['image_path'] = $fileName;  
+          }                   
+
+          Movies::find($id)->update($movies);
+          return redirect()->route('movies.index')->with('success','Movie was successfully updated!');
     }
 
     /**
@@ -106,6 +123,12 @@ class MoviesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $movie = Movies::find($id);
+    
+        if(File::exists(public_path('uploads/movies/'.$movie->image_path))){
+            File::delete(public_path('uploads/movies/'.$movie->image_path));
+        }
+        $movie->delete();
+        return redirect()->route('movies.index')->with('success','Movie was successfully deleted!');
     }
 }

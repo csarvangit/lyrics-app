@@ -11,6 +11,8 @@ use App\Models\Movies;
 use App\Models\Lyricists;
 use App\Models\Artists;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class SongsController extends Controller
 {
@@ -33,77 +35,33 @@ class SongsController extends Controller
      */
     public function index()
     {
-       // $songs = Songs::paginate(5);
-
+   
       // \DB::enableQueryLog();
 
-         /*  $songs = Songs::leftjoin('music_directors', 'music_directors.id', '=', 'songs.music_directors')
-              ->leftjoin('singers', 'singers.id', '=', 'songs.singers')
-              ->leftjoin('movies', 'movies.id', '=', 'songs.movies')
-              ->leftjoin('lyricists', 'lyricists.id', '=', 'songs.lyricists')
-              ->leftjoin('artists', 'artists.id', '=', 'songs.artists') 
-              ->orderBy('songs.id', 'desc')
-              ->select(['songs.id', 'songs.name','music_directors.name as music_directors', 'singers.name as singers', 'movies.name as movies', 'lyricists.name as lyricists', 'artists.name as artists'])
-              ->paginate(5);
-
-      $songs2 = Songs::leftjoin('music_directors',  DB::raw("json_extract(music_directors, '$[0].music_directors.id')"),"=","songs.music_directors")
-              ->leftjoin('singers', 'singers.id', '=', 'songs.singers')
-              ->leftjoin('movies', 'movies.id', '=', 'songs.movies')
-              ->leftjoin('lyricists', 'lyricists.id', '=', 'songs.lyricists')
-              ->leftjoin('artists', 'artists.id', '=', 'songs.artists') 
-              ->orderBy('songs.id', 'desc')
-              ->select(['songs.id', 'songs.name','music_directors.name as music_directors', 'singers.name as singers', 'movies.name as movies', 'lyricists.name as lyricists', 'artists.name as artists'])
-              ->paginate(5);   
-
-        $songs3 = Songs::leftjoin('music_directors',  function ($join) {
-                                    $join->on(function ($on) {
-                                        $on->whereRaw('JSON_CONTAINS(songs.music_directors, music_directors.id)');
-                                    });
-                                })
-              ->leftjoin('singers',  function ($join) {
-                        $join->on(function ($on) {
-                                $on->whereRaw('JSON_CONTAINS(singers.id, songs.singers)');
-                            });
-                        })
-              ->leftjoin('movies', 'movies.id', '=', 'songs.movies')
-              ->leftjoin('lyricists',  function ($join) {
-                            $join->on(function ($on) {
-                                $on->whereRaw('JSON_CONTAINS(lyricists.id, songs.lyricists)');
-                            });
-                        })
-              ->leftjoin('artists',  function ($join) {
-                            $join->on(function ($on) {
-                                $on->whereRaw('JSON_CONTAINS(artists.id, songs.artists)');
-                            });
-                        })
-              ->orderBy('songs.id', 'desc')
-              ->select(['songs.id', 'songs.name', 'music_directors.name as music_directors', 'singers.name as singers', 'movies.name as movies', 'lyricists.name as lyricists', 'artists.name as artists'])
-              ->paginate(5);      
-             
-              $songs = Songs::leftjoin('music_directors', 'music_directors.id', '=', 'songs.music_directors')
-              ->leftjoin('singers', 'singers.id', '=', 'songs.singers')
-              ->leftjoin('movies', 'movies.id', '=', 'songs.movies')
-              ->leftjoin('lyricists', 'lyricists.id', '=', 'songs.lyricists')
-              ->leftjoin('artists', 'artists.id', '=', 'songs.artists') 
-              ->orderBy('songs.id', 'desc')
-              ->select(['songs.id', 'songs.name','music_directors.name as music_directors', 'singers.name as singers', 'movies.name as movies', 'lyricists.name as lyricists', 'artists.name as artists'])
-              ->paginate(5);   */  
-              
-              
-              $songs = Songs::leftjoin('movies', 'movies.id', '=', 'songs.movies')             
-              ->orderBy('songs.id', 'desc')
-              ->select(['songs.*', 'movies.id as movies_id', 'movies.name as movies_name'])
-              ->paginate(5);
-              
-              $songs_data['songs'] = $songs;
-              $songs_data['music_directors'] = MusicDirectors::all();
-              $songs_data['singers'] = Singers::all();
-              $songs_data['lyricists'] = Lyricists::all();
-              $songs_data['artists'] = Artists::all();
+    /*  $songs = Songs::leftjoin('music_directors', 'music_directors.id', '=', 'songs.music_directors')
+        ->leftjoin('singers', 'singers.id', '=', 'songs.singers')
+        ->leftjoin('movies', 'movies.id', '=', 'songs.movies')
+        ->leftjoin('lyricists', 'lyricists.id', '=', 'songs.lyricists')
+        ->leftjoin('artists', 'artists.id', '=', 'songs.artists') 
+        ->orderBy('songs.id', 'desc')
+        ->select(['songs.id', 'songs.name','music_directors.name as music_directors', 'singers.name as singers', 'movies.name as movies', 'lyricists.name as lyricists', 'artists.name as artists'])
+        ->paginate(5);  */  
+        
+        
+        $songs = Songs::leftjoin('movies', 'movies.id', '=', 'songs.movies')             
+        ->orderBy('songs.id', 'desc')
+        ->select(['songs.*', 'movies.id as movies_id', 'movies.name as movies_name'])
+        ->paginate(5);
+        
+        $songs_data['songs'] = $songs;
+        $songs_data['music_directors'] = MusicDirectors::all();
+        $songs_data['singers'] = Singers::all();
+        $songs_data['lyricists'] = Lyricists::all();
+        $songs_data['artists'] = Artists::all();
               
              
-             // dd($songs->toArray()); 
-             // dd(\DB::getQueryLog());
+        // dd($songs->toArray()); 
+        // dd(\DB::getQueryLog());
 
         return view('songs.index', compact('songs_data'));
     }
@@ -130,12 +88,7 @@ class SongsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-         /*  $this->validate($request, [
-            'name'=>'required|string|max:255',
-            'artist'=>'required|string|max:255',
-            'lyrics'=>'required'
-        ]); */
+    {   
 
         $this->validate($request, [
             'name'=>'required',
@@ -146,22 +99,9 @@ class SongsController extends Controller
             'lyricists'=>'required',
             'artists'=>'required',
             'lyrics'=>'required'
-        ]);
-       // Songs::create($request->all());
+        ]);      
 
-        /* $songs_data['name'] = $request->name;
-        $songs_data['languages'] = $request->languages;
-        $songs_data['lyrics'] = $request->lyrics;
-
-        $songs_data['music_directors'] = json_encode($request->artists);
-        $songs_data['singers'] = json_encode($request->singers);
-        $songs_data['movies'] = json_encode($request->movies);
-        $songs_data['lyricists'] = json_encode($request->lyricists);
-        $songs_data['artists'] = json_encode($request->artists);  
-        Songs::create($songs_data); */
-
-        Songs::create($request->all());
-        
+        Songs::create($request->all());       
 
         return redirect()->route('songs.create')->with('success', 'Song successfully added');
     }
@@ -182,9 +122,6 @@ class SongsController extends Controller
         $song_data['movies']             = Movies::pluck('name','id');
         $song_data['lyricists']          = Lyricists::pluck('name','id');
         $song_data['artists']            = Artists::pluck('name','id'); 
-
-
-       // dd($song_data); 
       
         return view('songs.show',compact('song_data'));
     }
@@ -200,13 +137,7 @@ class SongsController extends Controller
        
         $song = Songs::find($id);       
         
-        $song_data['songs'] = $song;
-        // $song_data['music_directors'] = MusicDirectors::all();
-        // $song_data['movies'] = Movies::all();
-        // $song_data['singers'] = Singers::all();
-        // $song_data['lyricists'] = Lyricists::all();
-        // $song_data['artists'] = Artists::all();
-
+        $song_data['songs']              = $song;
         $song_data['music_directors']    = MusicDirectors::pluck('name','id');
         $song_data['singers']            = Singers::pluck('name','id');
         $song_data['movies']             = Movies::pluck('name','id');
@@ -246,8 +177,14 @@ class SongsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        Songs::find($id)->delete();
+    {        
+        $song = Songs::find($id);           
+
+        if(File::exists(public_path('uploads/songs/'.$song->image_path))){
+            File::delete(public_path('uploads/songs/'.$song->image_path));
+        }
+
+        $song->delete();
         return redirect()->route('songs.index')->with('success','Song lyrics was successfully deleted!');
     }
 }

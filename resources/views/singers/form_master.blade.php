@@ -31,11 +31,23 @@
           {{ Form::file('image_path', NULL, ['class'=>'form-control', 'id'=>'image_path']) }}
           {!! $errors->first('image_path', '<p class="help-block">:message</p>') !!}
         </div>
+
+        @php
+        if( isset($singer) ) {
+           $img_path =  URL::to('/uploads/singers/' .  $singer->image_path) ?? null;
+        } else {  
+           $img_path = null;
+        }
+        @endphp
+         
+        <div class="col-sm-4 pb-3">
+          <img class="thumb-preview" src="{{ $img_path }}" alt=""> 
+        </div>     
       </div>
     </div>
 
     <div class="form-group">
-      {{ Form::button(isset($model)? 'Update' : 'Save' , ['class'=>'btn btn-success', 'type'=>'submit']) }}
+      {{ Form::button(isset($singer)? 'Update' : 'Save' , ['class'=>'btn btn-success', 'type'=>'submit']) }}
     </div>
   </div>
 </div>

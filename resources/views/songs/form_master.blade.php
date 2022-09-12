@@ -117,6 +117,6 @@
   </div>
 </div>
 
-<div class="form-group">
-  {{ Form::button(isset($model)? 'Update' : 'Save' , ['class'=>'btn btn-success', 'type'=>'submit']) }}
+<div class="form-group pull-right">
+  {{ Form::button(isset($song_data['songs']) ? 'Update Song' : 'Send Song Request' , ['class'=>'btn btn-success', 'type'=>'submit']) }}
 </div>

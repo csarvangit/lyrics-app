@@ -1,9 +1,24 @@
 @extends('layouts.songs')
 @section('content')
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">              
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="{{ url('/admin/songs')}}">Dashboard</a>
+                </li>
+                <li class="active ml-3">
+                    <i class="fa fa-table"></i> Song
+                </li>
+            </ol>
+        </div>
+    </div>
+
   <div class="row">
       <div class="col-lg-12 margin-tb">
           <div class="pull-left">
-              <h2>Show Song</h2>
+              <h2>Song:  {{ $song_data['song']->name}}</h2>
           </div>
           <div class="pull-right">
               <br/>

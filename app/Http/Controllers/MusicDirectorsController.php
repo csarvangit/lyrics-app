@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\MusicDirectors;
+use Illuminate\Support\Facades\File;
 
 class MusicDirectorsController extends Controller
 {
@@ -84,7 +85,8 @@ class MusicDirectorsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $music_directors = MusicDirectors::find($id);
+        return view('music-directors.edit', compact('music_directors'));
     }
 
     /**
@@ -96,7 +98,22 @@ class MusicDirectorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+          ]);
+           
+          $music_directors['name'] = $request->name;
+          
+          if( $request->image_path ){
+            $fileName = time().'.'.$request->image_path->extension();  
+     
+            $request->image_path->move(public_path('uploads/music-directors'), $fileName);    
+            
+            $music_directors['image_path'] = $fileName;  
+          }                   
+
+          MusicDirectors::find($id)->update($music_directors);
+          return redirect()->route('music-directors.index')->with('success','Music Director was successfully updated!');
     }
 
     /**
@@ -107,6 +124,12 @@ class MusicDirectorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $music_director = MusicDirectors::find($id);
+
+        if(File::exists(public_path('uploads/music-directors/'.$music_director->image_path))){
+            File::delete(public_path('uploads/music-directors/'.$music_director->image_path));
+        }
+        $music_director->delete();
+        return redirect()->route('music-directors.index')->with('success','Music Director was successfully deleted!');
     }
 }

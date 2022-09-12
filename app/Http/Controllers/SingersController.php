@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Singers;
+use Illuminate\Support\Facades\File;
 
 class SingersController extends Controller
 {
@@ -82,7 +83,8 @@ class SingersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $singer = Singers::find($id);
+        return view('singers.edit', compact('singer'));
     }
 
     /**
@@ -94,7 +96,22 @@ class SingersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+          ]);
+           
+          $singers['name'] = $request->name;
+          
+          if( $request->image_path ){
+            $fileName = time().'.'.$request->image_path->extension();  
+     
+            $request->image_path->move(public_path('uploads/singers'), $fileName);    
+            
+            $singers['image_path'] = $fileName;  
+          }                   
+
+          Singers::find($id)->update($singers);
+          return redirect()->route('singers.index')->with('success','Singer was successfully updated!');
     }
 
     /**
@@ -105,6 +122,13 @@ class SingersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $singer = Singers::find($id);
+        
+        if(File::exists(public_path('uploads/singers/'.$singer->image_path))){
+            File::delete(public_path('uploads/singers/'.$singer->image_path));
+        }
+        
+        $singer->delete();
+        return redirect()->route('singers.index')->with('success','Singer was successfully deleted!');
     }
 }
