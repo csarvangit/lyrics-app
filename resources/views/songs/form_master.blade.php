@@ -89,25 +89,7 @@
 
 
 <div class="row">
-<div class="col-sm-5">
-    {{ Form::label('lyrics', 'Song Lyrics') }}
-  
-    <div class="form-group {{ $errors->has('lyrics') ? 'has-error' : ''}}">
-      {{ Form::textarea('lyrics_source', $song_data['songs']->lyrics ?? null, ['class' =>'form-control', 'id'=>'lyrics_source', 'data-placeholder'=>'Song Lyrics']) }}
-      
-    </div>
-  </div>
-
-  <div class="col-sm-2 d-flex align-items-center justify-content-center">  
-  
-    <div class="form-group">
-    {{ Form::button( 'Add >>' , ['class'=>'btn btn-info add_lyrics_to', 'type'=>'button']) }}
-      
-    </div>
-  </div>
-
-
-  <div class="col-sm-5">
+  <div class="col-sm-12">
     {{ Form::label('lyrics', 'Song Lyrics') }}
   
     <div class="form-group {{ $errors->has('lyrics') ? 'has-error' : ''}}">

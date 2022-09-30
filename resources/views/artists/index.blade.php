@@ -49,7 +49,7 @@
                         <div class="bg-options text-center mt-2">    
                             <a class="btn btn-primary btn-sm" href="{{route('artists.edit', $value->id)}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                             {{ Form::open(['method' => 'DELETE','route' => ['artists.destroy', $value->id],'style'=>'display:inline']) }}
-                            <button type="submit" style="display: inline;" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            <button type="submit" style="display: inline;" class="btn btn-danger btn-sm show_confirm"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             {{ Form::close() }}
                         </div>
                     </div>

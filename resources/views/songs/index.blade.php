@@ -61,8 +61,8 @@
                                     <a class="btn btn-info btn-sm" href="{{route('songs.show', $songs->id)}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     <a class="btn btn-primary btn-sm" href="{{route('songs.edit', $songs->id)}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                     {{ Form::open(['method' => 'DELETE','route' => ['songs.destroy', $songs->id],'style'=>'display:inline']) }}
-              <button type="submit" style="display: inline;" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
-            {{ Form::close() }}
+                                    <button type="submit" style="display: inline;" class="btn btn-danger btn-sm show_confirm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    {{ Form::close() }}
                                 </td>
                             </tr>
                         @endforeach
