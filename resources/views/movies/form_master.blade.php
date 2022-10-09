@@ -21,6 +21,18 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-sm-4">
+      {{ Form::label('year', 'Year') }}
+      </div>
+      <div class="col-sm-8">    
+  
+      <div class="form-group {{ $errors->has('year') ? 'has-error' : ''}}">
+        {{ Form::selectYear('year', 1970, date('Y'), $movie->year ?? date('Y'), ['class' =>'form-control form-select','id'=>'year', 'placeholder'=>'Please Select Year']) }}
+        {!! $errors->first('year', '<p class="help-block">:message</p>') !!}
+      </div>
+    </div> 
+
 
     <div class="row">
       <div class="col-sm-4">

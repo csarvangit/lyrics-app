@@ -20,9 +20,9 @@ class CreateSongsTable extends Migration
             $table->string('singers');
             $table->string('movies');
             $table->string('lyricists');
-            $table->string('artists');
-            $table->string('languages');
-            $table->longText('lyrics');
+            $table->string('artists');			         
+            $table->longText('lyrics_english');
+			$table->longText('lyrics_tamil');
             $table->string('image_path');
             $table->timestamps();
         });

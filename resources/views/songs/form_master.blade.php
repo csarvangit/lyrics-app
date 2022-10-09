@@ -32,16 +32,14 @@
     </div>
   </div>
 
-  <div class="col-sm-2">
+ <!-- <div class="col-sm-2">
     {{ Form::label('languages', 'Language') }}
   
     <div class="form-group {{ $errors->has('languages') ? 'has-error' : ''}}">
       {{ Form::select('languages', array('tamil' => 'Tamil', 'english' => 'English'), $song_data['songs']->languages ?? null, ['class' =>'form-control form-select','id'=>'languages', 'placeholder'=>'Please Select Language']) }}
       {!! $errors->first('languages', '<p class="help-block">:message</p>') !!}
     </div>
-  </div>
-
-
+  </div> --> 
 
 </div>
 
@@ -89,16 +87,44 @@
 
 
 <div class="row">
-  <div class="col-sm-12">
-    {{ Form::label('lyrics', 'Song Lyrics') }}
-  
-    <div class="form-group {{ $errors->has('lyrics') ? 'has-error' : ''}}">
-      {{ Form::textarea('lyrics', $song_data['songs']->lyrics ?? null, ['class' =>'form-control', 'id'=>'lyrics', 'data-placeholder'=>'Song Lyrics']) }}
-      {!! $errors->first('lyrics', '<p class="help-block">:message</p>') !!}
+  <div class="col-sm-12">    
+
+  <!-- Tabs navs -->
+  <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="lyrics_tamil-tab" data-bs-toggle="tab" data-bs-target="#lyrics_tamil" type="button" role="tab" aria-controls="home" aria-selected="true">Tamil</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="lyrics_english-tab" data-bs-toggle="tab" data-bs-target="#lyrics_english" type="button" role="tab" aria-controls="profile" aria-selected="false">English</button>
+  </li>
+ 
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="lyrics_tamil" role="tabpanel" aria-labelledby="home-tab">
+    {{ Form::label('lyrics_tamil', 'Song Tamil Lyrics') }}
+    
+    <div class="form-group {{ $errors->has('lyrics_tamil') ? 'has-error' : ''}}">
+      {{ Form::textarea('lyrics_tamil', $song_data['songs']->lyrics_tamil ?? null, ['class' =>'form-control', 'id'=>'lyrics_tamil', 'data-placeholder'=>'Song Tamil Lyrics']) }}
+      {!! $errors->first('lyrics_tamil', '<p class="help-block">:message</p>') !!}
     </div>
+  </div>
+  <div class="tab-pane fade" id="lyrics_english" role="tabpanel" aria-labelledby="profile-tab">
+    {{ Form::label('lyrics_english', 'Song English Lyrics') }}
+    
+    <div class="form-group {{ $errors->has('lyrics_english') ? 'has-error' : ''}}">
+      {{ Form::textarea('lyrics_english', $song_data['songs']->lyrics_english ?? null, ['class' =>'form-control', 'id'=>'lyrics_english', 'data-placeholder'=>'Song English Lyrics']) }}
+      {!! $errors->first('lyrics_english', '<p class="help-block">:message</p>') !!}
+    </div>
+  </div> 
+</div>
+<!-- Tabs content -->
+
+
+
+
   </div>
 </div>
 
 <div class="form-group pull-right">
-  {{ Form::button(isset($song_data['songs']) ? 'Update Song' : 'Send Song Request' , ['class'=>'btn btn-success', 'type'=>'submit']) }}
+  {{ Form::button(isset($song_data['songs']) ? 'Update Song' : 'Save Song' , ['class'=>'btn btn-success', 'type'=>'submit']) }}
 </div>

@@ -9,7 +9,7 @@ class Songs extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["name", "music_directors", "singers", "movies", "lyricists", "artists", "languages", "lyrics", "image_path", "created_at", "updated_at"];
+    protected $fillable = ["name", "music_directors", "singers", "movies", "lyricists", "artists", "lyrics_tamil", "lyrics_english", "image_path", "created_at", "updated_at"];
 
     protected $casts = [
         'music_directors' => 'json',

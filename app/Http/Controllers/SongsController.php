@@ -92,15 +92,14 @@ class SongsController extends Controller
 
         $this->validate($request, [
             'name'=>'required',
-            'languages'=>'required',
             'music_directors'=>'required',
             'singers'=>'required',
             'movies'=>'required',            
             'lyricists'=>'required',
             'artists'=>'required',
-            'lyrics'=>'required'
+            'lyrics_tamil'=>'required'
         ]);      
-
+        
         Songs::create($request->all());       
 
         return redirect()->route('songs.create')->with('success', 'Song successfully added');
@@ -119,10 +118,10 @@ class SongsController extends Controller
         $song_data['song']               = $song;
         $song_data['music_directors']    = MusicDirectors::pluck('name','id');
         $song_data['singers']            = Singers::pluck('name','id');
-        $song_data['movies']             = Movies::pluck('name','id');
+        $song_data['movies']             = Movies::pluck('name', 'id');
         $song_data['lyricists']          = Lyricists::pluck('name','id');
         $song_data['artists']            = Artists::pluck('name','id'); 
-      
+    
         return view('songs.show',compact('song_data'));
     }
 
@@ -158,14 +157,16 @@ class SongsController extends Controller
     {
         $this->validate($request,[
             'name'=>'required',
-            'languages'=>'required',
             'music_directors'=>'required',
             'singers'=>'required',
             'movies'=>'required',            
             'lyricists'=>'required',
             'artists'=>'required',
-            'lyrics'=>'required'
+            'lyrics_tamil'=>'required'
           ]);
+
+          //dd($request->all());
+
           Songs::find($id)->update($request->all());
           return redirect()->route('songs.index')->with('success','Song was successfully updated!');
     }
