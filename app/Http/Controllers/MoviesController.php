@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Songs;
+use App\Models\MusicDirectors;
+use App\Models\Singers;
 use App\Models\Movies;
+use App\Models\Lyricists;
+use App\Models\Artists;
 use Illuminate\Support\Facades\File;
 
 class MoviesController extends Controller
@@ -75,6 +80,20 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
+        
+        $songs = Songs::leftjoin('movies', 'movies.id', '=', 'songs.movies')                  
+        ->orderBy('songs.id', 'desc')
+        ->select(['songs.*', 'movies.id as movies_id', 'movies.name as movies_name'])
+        ->where('songs.movies', '=', $id)  
+        ->paginate(10);
+        
+        $songs_data['songs'] = $songs;
+        $songs_data['music_directors'] = MusicDirectors::all();
+        $songs_data['singers'] = Singers::all();
+        $songs_data['lyricists'] = Lyricists::all();
+        $songs_data['artists'] = Artists::all(); 
+    
+        return view('movies.show',compact('songs_data'));
         
     }
 

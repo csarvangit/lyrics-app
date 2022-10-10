@@ -11,7 +11,10 @@
                       <i class="fa fa-dashboard"></i>  <a href="{{ url('/admin/songs')}}">Dashboard</a>
                   </li>
                   <li class="active ml-3">
-                      <i class="fa fa-table"></i> All Songs
+                      <i class="fa fa-table"></i> Movies
+                  </li>
+                  <li class="active ml-3">
+                      <i class="fa fa-table"></i> Songs
                   </li>
               </ol>
           </div>
@@ -25,26 +28,45 @@
 
       <div class="row">
           <div class="col-lg-12">
-              <h3>All Songs</h3>
+              <h3>
+              @if ( $songs_data['songs'][0] )   
+              {{ $songs_data['songs'][0]->movies_name }} Songs
+              @else
+              No Songs
+              @endif  
+              </h3>
               <div class="table-responsive-sm">
                   <table class="table table-hover table-striped">
                       <thead>
                           <tr>
-                              <th>Sl No</th>  
+                              <th>Sl No</th>
                               <th>Song</th>
-                              <th>Movie</th>
+                              <th>lyricists</th>
                               <th>Music By</th>
                               <th>                      
-                                  <a class="btn btn-primary ml-auto" href="{{ url('/admin/songs/create')}}"> <i class="fa fa-plus"></i>  Add Song</a>
+                                  
                               </th>
                           </tr>
                       </thead>
                       <tbody>                      
                           @foreach( $songs_data['songs'] as $key => $songs)
                             <tr>
-                                <td>{{ $songs_data['songs']->firstItem() + $key }} </td>
-                                <td>{{ $songs->name }}  </td>
-                                <td>{{ $songs->movies_name }}</td>
+                                <td>{{ $key + 1 }} </td>
+                                <td>{{ $songs->name }} </td>
+                                <td>
+                                @if ($songs->lyricists) 
+                                    @foreach( $songs->lyricists as $key => $md)
+                              
+                                        @if ($songs_data['lyricists']) 
+                                            {{$songs_data['lyricists'][$md-1]->name}}
+
+                                            {{ $loop->last ? '' : ', ' }}
+
+                                         @endif  
+                                     @endforeach 
+                                @endif  
+
+                                </td>
                                 <td>                 
                                 @if ($songs->music_directors) 
                                     @foreach( $songs->music_directors as $key => $md)
@@ -60,10 +82,7 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-info btn-sm" href="{{route('songs.show', $songs->id)}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                    <a class="btn btn-primary btn-sm" href="{{route('songs.edit', $songs->id)}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                    {{ Form::open(['method' => 'DELETE','route' => ['songs.destroy', $songs->id],'style'=>'display:inline']) }}
-                                    <button type="submit" style="display: inline;" class="btn btn-danger btn-sm show_confirm"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    {{ Form::close() }}
+                                    
                                 </td>
                             </tr>
                         @endforeach
