@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Songs;
 use App\Models\MusicDirectors;
+use App\Models\Singers;
+use App\Models\Movies;
+use App\Models\Lyricists;
+use App\Models\Artists;
 use Illuminate\Support\Facades\File;
 
 class MusicDirectorsController extends Controller
@@ -74,7 +79,17 @@ class MusicDirectorsController extends Controller
      */
     public function show($id)
     {
+        $songs_data['music_directors'] = MusicDirectors::find($id);     
+
+       // $songs = Songs::where('music_directors', 'like', "%$id%")->paginate(10);
+        $songs = Songs::whereJsonContains("music_directors", $id)->paginate(10);
         
+        $songs_data['songs'] = $songs;
+        $songs_data['singers']            = Singers::pluck('name','id');
+        $songs_data['movies']             = Movies::pluck('name', 'id');
+        $songs_data['lyricists']          = Lyricists::pluck('name','id');       
+    
+        return view('music-directors.show',compact('songs_data'));
     }
 
     /**
