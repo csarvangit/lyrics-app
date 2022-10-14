@@ -83,7 +83,7 @@ class MoviesController extends Controller
         
         $songs = Songs::leftjoin('movies', 'movies.id', '=', 'songs.movies')                  
         ->orderBy('songs.id', 'desc')
-        ->select(['songs.*', 'movies.id as movies_id', 'movies.name as movies_name'])
+        ->select(['songs.*', 'movies.id as movies_id', 'movies.name as movies_name', 'movies.year'])
         ->where('songs.movies', '=', $id)  
         ->paginate(10);
         

@@ -42,10 +42,8 @@
                               <th>Sl No</th>
                               <th>Song</th>
                               <th>Movie</th>
-                              <th>Music Directors</th>                             
-                              <th>                      
-                                  
-                              </th>
+                              <th>Year</th>                             
+                              <th> </th>
                           </tr>
                       </thead>
                       <tbody>                      
@@ -53,24 +51,8 @@
                             <tr>
                                 <td>{{ $key + 1 }} </td>
                                 <td>{{ $songs->name }} </td>
-                                <td>           
-                                @if ($songs->movies) 
-                                {{$songs_data['movies'][$songs->movies]}} 
-                                @endif  
-                                </td>
-                                <td>
-                                @if ($songs->music_directors) 
-                                    @foreach( $songs->music_directors as $key => $md)
-                              
-                                        @if ($songs_data['music_directors']) 
-                                            {{$songs_data['music_directors'][$md]}}
-
-                                            {{ $loop->last ? '' : ', ' }}
-
-                                         @endif  
-                                     @endforeach 
-                                @endif  
-                                </td>                                
+                                <td>{{ $songs->movies_name }} </td>
+                                <td>{{ $songs->year }} </td>                             
                                 <td>
                                     <a class="btn btn-info btn-sm" href="{{route('songs.show', $songs->id)}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     

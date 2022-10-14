@@ -39,6 +39,7 @@
               <strong>Movie : </strong>         
               @php  
               $movies = $song_data['song']->movies;
+             
               @endphp  
               {{$song_data['movies'][$movies]}}
 
@@ -111,6 +112,8 @@
 
           </div>
       </div>
+    
+
       <div class="col-xs-12 col-sm-12 col-md-12">
          
       <div class="form-group"><strong>Lyrics : </strong>  </div>           

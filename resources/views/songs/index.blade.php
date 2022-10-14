@@ -34,6 +34,7 @@
                               <th>Song</th>
                               <th>Movie</th>
                               <th>Music By</th>
+                              <th>Year</th>
                               <th>                      
                                   <a class="btn btn-primary ml-auto" href="{{ url('/admin/songs/create')}}"> <i class="fa fa-plus"></i>  Add Song</a>
                               </th>
@@ -58,6 +59,7 @@
                                      @endforeach 
                                 @endif 
                                 </td>
+                                <td>{{ $songs->year }}</td>
                                 <td>
                                     <a class="btn btn-info btn-sm" href="{{route('songs.show', $songs->id)}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     <a class="btn btn-primary btn-sm" href="{{route('songs.edit', $songs->id)}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>

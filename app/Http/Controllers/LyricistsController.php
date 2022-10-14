@@ -77,12 +77,16 @@ class LyricistsController extends Controller
     public function show($id)
     {
         $songs_data['lyricists'] = Lyricists::find($id);           
-        $songs = Songs::whereJsonContains("lyricists", $id)->paginate(10);       
         
-        $songs_data['songs'] = $songs;     
+        $songs = Songs::leftjoin('movies', 'movies.id', '=', 'songs.movies')                  
+        ->orderBy('songs.id', 'desc')
+        ->select(['songs.*', 'movies.id as movies_id', 'movies.name as movies_name', 'movies.year'])
+        ->whereJsonContains("lyricists", $id)
+        ->paginate(10);
+        
+        $songs_data['songs']              = $songs;     
         $songs_data['singers']            = Singers::pluck('name','id');    
-        $songs_data['music_directors']    = MusicDirectors::pluck('name', 'id');
-        $songs_data['movies']             = Movies::pluck('name', 'id');             
+        $songs_data['music_directors']    = MusicDirectors::pluck('name', 'id');            
     
         return view('lyricists.show',compact('songs_data'));
     }

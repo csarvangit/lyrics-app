@@ -50,7 +50,7 @@ class SongsController extends Controller
         
         $songs = Songs::leftjoin('movies', 'movies.id', '=', 'songs.movies')             
         ->orderBy('songs.id', 'desc')
-        ->select(['songs.*', 'movies.id as movies_id', 'movies.name as movies_name'])
+        ->select(['songs.*', 'movies.id as movies_id', 'movies.name as movies_name', 'movies.year'])
         ->paginate(5);
         
         $songs_data['songs'] = $songs;
@@ -113,8 +113,9 @@ class SongsController extends Controller
      */
     public function show($id)
     {        
-        $song = Songs::find($id);
+       $song = Songs::find($id);
 
+       
         $song_data['song']               = $song;
         $song_data['music_directors']    = MusicDirectors::pluck('name','id');
         $song_data['singers']            = Singers::pluck('name','id');

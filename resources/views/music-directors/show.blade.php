@@ -42,11 +42,8 @@
                               <th>Sl No</th>
                               <th>Song</th>
                               <th>Movie</th>
-                              <th>lyricists</th>
-                              <th>Singers</th>
-                              <th>                      
-                                  
-                              </th>
+                              <th>Year</th>                            
+                              <th> </th>
                           </tr>
                       </thead>
                       <tbody>                      
@@ -54,34 +51,10 @@
                             <tr>
                                 <td>{{ $key + 1 }} </td>
                                 <td>{{ $songs->name }} </td>
-                                <td>           
-                                @if ($songs->movies) 
-                                {{$songs_data['movies'][$songs->movies]}} 
-                                @endif  
-                                </td>
-                                <td>
-                                @if ($songs->lyricists) 
-                                    @foreach( $songs->lyricists as $key => $lyricists)                            
-                                        @if ($songs_data['lyricists']) 
-                                            {{$songs_data['lyricists'][$lyricists]}}                                              
-                                            {{ $loop->last ? '' : ', ' }}
-                                         @endif  
-                                     @endforeach 
-                                @endif  
-                                </td>
-                                <td>           
-                                @if ($songs->singers) 
-                                    @foreach( $songs->singers as $key => $singers)                            
-                                        @if ($songs_data['singers']) 
-                                            {{$songs_data['singers'][$singers]}}                                              
-                                            {{ $loop->last ? '' : ', ' }}
-                                         @endif  
-                                     @endforeach 
-                                @endif  
-                                </td>
+                                <td>{{ $songs->movies_name }} </td>
+                                <td>{{ $songs->year }} </td>                               
                                 <td>
                                     <a class="btn btn-info btn-sm" href="{{route('songs.show', $songs->id)}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                    
                                 </td>
                             </tr>
                         @endforeach

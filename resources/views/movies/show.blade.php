@@ -43,9 +43,8 @@
                               <th>Song</th>
                               <th>lyricists</th>
                               <th>Music By</th>
-                              <th>                      
-                                  
-                              </th>
+                              <th>Year</th>
+                              <th> </th>
                           </tr>
                       </thead>
                       <tbody>                      
@@ -80,6 +79,7 @@
                                      @endforeach 
                                 @endif 
                                 </td>
+                                <td>{{ $songs_data['songs'][0]->year }}</td>
                                 <td>
                                     <a class="btn btn-info btn-sm" href="{{route('songs.show', $songs->id)}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     
