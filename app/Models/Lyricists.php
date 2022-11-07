@@ -9,5 +9,5 @@ class Lyricists extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["name", "image_path", "created_at", "updated_at"];
+    protected $fillable = ["name", "bio", "awards", "youtube_url", "image_path", "created_at", "updated_at"];
 }

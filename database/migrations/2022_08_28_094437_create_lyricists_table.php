@@ -16,6 +16,9 @@ class CreateLyricistsTable extends Migration
         Schema::create('lyricists', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->longText('bio')->nullable();
+            $table->longText('awards')->nullable();
+            $table->string('youtube_url')->nullable();
             $table->string('image_path');
             $table->timestamps();
         });

@@ -21,6 +21,18 @@
       </div>
     </div>
 
+    <div class="row">
+        <div class="col-sm-4">
+          {{ Form::label('bio', 'Singer Biography') }}
+        </div>
+        <div class="col-sm-8">
+          <div class="form-group {{ $errors->has('bio') ? 'has-error' : ''}}">
+            {{ Form::textarea('bio', NULL, ['class' =>'form-control ckeditor', 'id'=>'bio', 'placeholder'=>'Biography']) }}
+            {!! $errors->first('bio', '<p class="help-block">:message</p>') !!}
+          </div>      
+      </div>
+    </div>
+
 
     <div class="row">
       <div class="col-sm-4">
@@ -43,6 +55,29 @@
         <div class="col-sm-4 pb-3">
           <img class="thumb-preview" src="{{ $img_path }}" alt=""> 
         </div>     
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+          {{ Form::label('awards', 'Singer Awards') }}
+        </div>
+        <div class="col-sm-8">
+          <div class="form-group {{ $errors->has('awards') ? 'has-error' : ''}}">
+            {{ Form::textarea('awards', NULL, ['class' =>'form-control ckeditor', 'id'=>'awards', 'placeholder'=>'Awards Won']) }}
+            {!! $errors->first('awards', '<p class="help-block">:message</p>') !!}
+          </div>      
+      </div>
+    </div>
+
+    <div class="row pb-3">
+        <div class="col-sm-4">
+          {{ Form::label('youtube_url', 'Youtube URL') }}
+        </div>
+        <div class="col-sm-8">          
+          {{ Form::text('youtube_url', NULL, ['class' =>'form-control', 'id'=>'youtube_url', 'placeholder'=>'Youtube URL']) }}
+          {!! $errors->first('youtube_url', '<p class="help-block">:message</p>') !!}       
+          </div>      
       </div>
     </div>
 

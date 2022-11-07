@@ -26,15 +26,27 @@
       </div>
     @endif
 
-      <div class="row">
-          <div class="col-lg-12">
-              <h3>
+    <div class="row pb-4">
+        <div class="col-lg-12">
+            <h3>
               @if ( $songs_data['singers'] )   
               {{ $songs_data['singers']->name }} Songs
               @else
               No Singers
               @endif  
               </h3>
+            <div class="bio-content">
+                
+             @if ( $songs_data['singers']->bio && $songs_data['singers']->bio != null )   
+             {!! $songs_data['singers']->bio !!}          
+              @endif  
+
+            </div>  
+        </div>
+    </div> 
+
+      <div class="row">
+          <div class="col-lg-12">              
               <div class="table-responsive-sm">
                   <table class="table table-hover table-striped">
                       <thead>
@@ -73,6 +85,32 @@
         {{ $songs_data['songs']->links()  }}  
          Showing {{ $songs_data['songs']->firstItem() }} to {{ $songs_data['songs']->lastItem() }} of total {{$songs_data['songs']->total()}} entries 
     </div>
+
+    @if ( $songs_data['singers']->youtube_url !== NULL ||  !empty($songs_data['singers']->youtube_url) )
+    <div class="row pt-4"> 
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Youtube : </strong>         
+                <div> 
+                    <iframe width="420" height="315" src="{{$songs_data['singers']->youtube_url}}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+      </div> 
+      @endif 
+
+      @if ( $songs_data['singers']->awards )    
+        <div class="row pt-4 pb-4">
+            <div class="col-lg-12"> 
+                <h4>              
+                Awards Won             
+                </h4>
+                <div class="awards-content pb-2">
+                {!! $songs_data['singers']->awards !!}
+                </div>  
+            </div>
+         </div> 
+    @endif 
   
   <!-- /.container-fluid -->
 

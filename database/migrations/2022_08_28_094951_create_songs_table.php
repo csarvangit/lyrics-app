@@ -24,6 +24,7 @@ class CreateSongsTable extends Migration
             $table->longText('lyrics_english');
 			$table->longText('lyrics_tamil');
             $table->string('image_path');
+            $table->string('youtube_url')->nullable();
             $table->timestamps();
         });
     }

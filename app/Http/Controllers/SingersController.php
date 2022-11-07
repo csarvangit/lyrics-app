@@ -63,6 +63,9 @@ class SingersController extends Controller
  
         $singers['name'] = $request->name;
         $singers['image_path'] = $fileName;
+        $singers['bio'] = $request->bio ? $request->bio : NULL;
+        $singers['awards'] = $request->awards ? $request->awards : NULL;
+        $singers['youtube_url'] = $request->youtube_url ? $request->youtube_url : NULL;
 
         Singers::create($singers);
 
@@ -118,6 +121,9 @@ class SingersController extends Controller
           ]);
            
           $singers['name'] = $request->name;
+          $singers['bio'] = $request->bio ? $request->bio : NULL;
+          $singers['awards'] = $request->awards ? $request->awards : NULL;
+          $singers['youtube_url'] = $request->youtube_url ? $request->youtube_url : NULL;
           
           if( $request->image_path ){
             $fileName = time().'.'.$request->image_path->extension();  

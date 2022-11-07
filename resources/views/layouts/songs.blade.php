@@ -28,7 +28,6 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
     <link href="{{ asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
-
     
 </head>
 
@@ -111,6 +110,7 @@
     <!-- Jquery -->
 
     <script src="{{ asset('js/jquery.js')}}"></script>
+     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 
     <!-- Bootstrap Core JavaScript 
     <script src="{{ asset('js/bootstrap.min.js')}}" defer></script>-->
@@ -119,7 +119,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
     <script src="{{ asset('js/script.js')}}"></script>
 </body>
 

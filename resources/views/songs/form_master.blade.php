@@ -120,7 +120,16 @@
 <!-- Tabs content -->
 
 
-
+<div class="row">
+  <div class="col-sm-6">
+    {{ Form::label('youtube_url', 'Youtube URL') }}
+  
+    <div class="form-group {{ $errors->has('youtube_url') ? 'has-error' : ''}}">
+      {{ Form::text('youtube_url', $song_data['songs']->youtube_url ?? null, ['class' =>'form-control', 'id'=>'youtube_url', 'placeholder'=>'Youtube URL']) }}
+      {!! $errors->first('youtube_url', '<p class="help-block">:message</p>') !!}
+    </div>
+  </div>
+</div>
 
   </div>
 </div>

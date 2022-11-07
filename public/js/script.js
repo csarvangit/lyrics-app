@@ -27,6 +27,7 @@ $(document).ready(function() {
         reader.readAsDataURL(this.files[0]);       
     });
 
+    // Confirm Delete alert box
     $('.show_confirm').click(function(event) {
         var form =  $(this).closest("form");
        // var name = $(this).data("name");
@@ -45,4 +46,8 @@ $(document).ready(function() {
         });
     });
 
+    // Textarea WYSIWYG
+    if( $('.ckeditor').length ){   
+        $('.ckeditor').ckeditor();
+    } 
 });

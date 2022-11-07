@@ -62,6 +62,9 @@ class LyricistsController extends Controller
  
         $lyricists['name'] = $request->name;
         $lyricists['image_path'] = $fileName;
+        $lyricists['bio'] = $request->bio ? $request->bio : NULL;
+        $lyricists['awards'] = $request->awards ? $request->awards : NULL;
+        $lyricists['youtube_url'] = $request->youtube_url ? $request->youtube_url : NULL;
 
         Lyricists::create($lyricists);
 
@@ -117,6 +120,9 @@ class LyricistsController extends Controller
           ]);
            
           $lyricist['name'] = $request->name;
+          $lyricist['bio'] = $request->bio ? $request->bio : NULL;
+          $lyricist['awards'] = $request->awards ? $request->awards : NULL;
+          $lyricist['youtube_url'] = $request->youtube_url ? $request->youtube_url : NULL;
           
           if( $request->image_path ){
             $fileName = time().'.'.$request->image_path->extension();  

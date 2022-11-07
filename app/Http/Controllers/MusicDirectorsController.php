@@ -66,6 +66,10 @@ class MusicDirectorsController extends Controller
         $md['name'] = $request->name;
         $md['image_path'] = $fileName;
 
+        $md['bio'] = $request->bio ? $request->bio : NULL;
+        $md['awards'] = $request->awards ? $request->awards : NULL;
+        $md['youtube_url'] = $request->youtube_url ? $request->youtube_url : NULL;
+
         MusicDirectors::create($md);
 
         return redirect()->route('music-directors.create')->with('success', 'Music Director successfully added');
@@ -120,6 +124,10 @@ class MusicDirectorsController extends Controller
           ]);
            
           $music_directors['name'] = $request->name;
+          
+          $music_directors['bio'] = $request->bio ? $request->bio : NULL;
+          $music_directors['awards'] = $request->awards ? $request->awards : NULL;
+          $music_directors['youtube_url'] = $request->youtube_url ? $request->youtube_url : NULL;
           
           if( $request->image_path ){
             $fileName = time().'.'.$request->image_path->extension();  

@@ -116,34 +116,47 @@
 
       <div class="col-xs-12 col-sm-12 col-md-12">
          
-      <div class="form-group"><strong>Lyrics : </strong>  </div>           
+        <div class="form-group"><strong>Lyrics : </strong>  </div>           
 
-         <!-- Tabs navs -->
-        <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="lyrics_tamil-tab" data-bs-toggle="tab" data-bs-target="#lyrics_tamil" type="button" role="tab" aria-controls="home" aria-selected="true">Tamil</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="lyrics_english-tab" data-bs-toggle="tab" data-bs-target="#lyrics_english" type="button" role="tab" aria-controls="profile" aria-selected="false">English</button>
-        </li>
-        
-        </ul>
-        <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="lyrics_tamil" role="tabpanel" aria-labelledby="home-tab">
-                      
-            <div class="form-group">
-                <pre>{{ $song_data['song']->lyrics_tamil}}</pre>
+            <!-- Tabs navs -->
+            <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="lyrics_tamil-tab" data-bs-toggle="tab" data-bs-target="#lyrics_tamil" type="button" role="tab" aria-controls="home" aria-selected="true">Tamil</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="lyrics_english-tab" data-bs-toggle="tab" data-bs-target="#lyrics_english" type="button" role="tab" aria-controls="profile" aria-selected="false">English</button>
+                </li>
+            
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="lyrics_tamil" role="tabpanel" aria-labelledby="home-tab">
+                            
+                    <div class="form-group">
+                        <pre>{{ $song_data['song']->lyrics_tamil}}</pre>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="lyrics_english" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="form-group">
+                        <pre>{{ $song_data['song']->lyrics_english}}</pre>
+                    </div>
+                </div> 
             </div>
-        </div>
-        <div class="tab-pane fade" id="lyrics_english" role="tabpanel" aria-labelledby="profile-tab">
-             <div class="form-group">
-                <pre>{{ $song_data['song']->lyrics_english}}</pre>
-            </div>
-        </div> 
-        </div>
-        <!-- Tabs content -->
+            <!-- Tabs content -->
 
 
+        </div>
+     </div>
+    
+     @if ( $song_data['song']->youtube_url !== NULL ||  !empty($song_data['song']->youtube_url) )
+     <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+              <strong>Youtube : </strong>         
+                <div> 
+                    {{-- Embed::make($song_data['song']->youtube_url)->parseUrl()->getIframe() --}}
+                    <iframe width="420" height="315" src="{{$song_data['song']->youtube_url}}" frameborder="0" allowfullscreen></iframe>
+                </div>
+          </div>
       </div>
-  </div>
+      @endif  
+     
 @endsection
