@@ -40,6 +40,11 @@ Route::resource('/admin/movies', 'App\Http\Controllers\MoviesController');
 Route::resource('/admin/music-directors', 'App\Http\Controllers\MusicDirectorsController');
 Route::resource('/admin/singers', 'App\Http\Controllers\SingersController');
 Route::resource('/admin/lyricists', 'App\Http\Controllers\LyricistsController');
+
+Route::get('/admin/artists/lyricists', [App\Http\Controllers\ArtistsController::class, 'lyricists'])->name('artists.lyricists');
+Route::get('/admin/artists/singers', [App\Http\Controllers\ArtistsController::class, 'singers'])->name('artists.singers');
+Route::get('/admin/artists/music-directors', [App\Http\Controllers\ArtistsController::class, 'music_directors'])->name('artists.music_directors');
+
 Route::resource('/admin/artists', 'App\Http\Controllers\ArtistsController');
 
 Route::get('/clear-all', function() {

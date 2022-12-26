@@ -14,6 +14,10 @@
                   <i class="fa fa-table"></i> Songs / Create
               </li>
           </ol>
+
+          <div class="pull-right">
+                <a class="btn btn-primary" href="{{ url()->previous() }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+            </div>
       </div>
   </div>
 

@@ -50,8 +50,8 @@
                                 @if ($songs->music_directors) 
                                     @foreach( $songs->music_directors as $key => $md)
                               
-                                        @if ($songs_data['music_directors']) 
-                                            {{$songs_data['music_directors'][$md-1]->name}}
+                                        @if ($songs_data['artists']) 
+                                            {{$songs_data['artists'][$md-1]->name}}
 
                                             {{ $loop->last ? '' : ', ' }}
 

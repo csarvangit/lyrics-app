@@ -49,19 +49,18 @@
             <a class="nav-link" href="{{route('movies.index')}}"> Movies</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{route('music-directors.index')}}"> Music Directors</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('/admin/singers')}}"> Singers</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url('/admin/lyricists')}}"> Lyricists</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="{{ url('/admin/artists')}}"> Artists</a>
         </li> 
-      </ul>
-      
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('artists.music_directors')}}"> Music Directors</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('artists.singers')}}"> Singers</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('artists.lyricists')}}"> Lyricists</a>
+        </li> 
+      </ul>      
 
             <ul class="navbar-nav">
             <!-- Authentication Links -->

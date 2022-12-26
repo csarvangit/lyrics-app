@@ -53,17 +53,7 @@
       {!! $errors->first('singers', '<p class="help-block">:message</p>') !!}
     </div>
   </div>
-
-  <div class="col-sm-3">
   
-    {{ Form::label('artists', 'Artists') }}
-  
-    <div class="form-group {{ $errors->has('artists') ? 'has-error' : ''}}">
-      {{ Form::select('artists[]', $song_data['artists'], $song_data['songs']->artists ?? null, ['class' =>'form-control form-select multiselect-opt','id'=>'artists', 'data-placeholder'=>'Please Select Artists', 'multiple'=>'multiple']) }}
-      {!! $errors->first('artists', '<p class="help-block">:message</p>') !!}
-    </div>
-  </div>
-
   <div class="col-sm-3">
   
     {{ Form::label('lyricists', 'Lyricists') }}
@@ -134,6 +124,6 @@
   </div>
 </div>
 
-<div class="form-group pull-right">
+<div class="form-group text-center pt-3 pb-5">
   {{ Form::button(isset($song_data['songs']) ? 'Update Song' : 'Save Song' , ['class'=>'btn btn-success', 'type'=>'submit']) }}
 </div>

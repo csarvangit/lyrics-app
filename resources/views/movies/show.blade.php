@@ -1,6 +1,7 @@
 @extends('layouts.songs')
 @section('content')
 
+
   <div class="container-fluid">
 
       <!-- Page Heading -->
@@ -17,6 +18,10 @@
                       <i class="fa fa-table"></i> Songs
                   </li>
               </ol>
+
+              <div class="pull-right">
+                <a class="btn btn-primary" href="{{ url()->previous() }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+            </div>
           </div>
       </div>
       <!-- /.row -->
@@ -54,24 +59,23 @@
                                 <td>{{ $songs->name }} </td>
                                 <td>
                                 @if ($songs->lyricists) 
-                                    @foreach( $songs->lyricists as $key => $md)
-                              
+                                    @foreach( $songs->lyricists as $key => $lyricist)
+                             
                                         @if ($songs_data['lyricists']) 
-                                            {{$songs_data['lyricists'][$md-1]->name}}
+                                        {{$songs_data['lyricists'][$lyricist]}}
 
                                             {{ $loop->last ? '' : ', ' }}
 
                                          @endif  
                                      @endforeach 
-                                @endif  
-
+                                @endif 
                                 </td>
                                 <td>                 
                                 @if ($songs->music_directors) 
-                                    @foreach( $songs->music_directors as $key => $md)
+                                    @foreach( $songs->music_directors as $key => $music_director)
                               
                                         @if ($songs_data['music_directors']) 
-                                            {{$songs_data['music_directors'][$md-1]->name}}
+                                            {{$songs_data['music_directors'][$music_director]}}
 
                                             {{ $loop->last ? '' : ', ' }}
 

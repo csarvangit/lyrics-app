@@ -12,6 +12,10 @@
                     <i class="fa fa-table"></i> Song
                 </li>
             </ol>
+
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ url()->previous() }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+            </div>
         </div>
     </div>
 
@@ -20,10 +24,7 @@
           <div class="pull-left">
               <h2>Song:  {{ $song_data['song']->name}}</h2>
           </div>
-          <div class="pull-right">
-              <br/>
-              <a class="btn btn-primary" href="{{ route('songs.index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-          </div>
+          
       </div>
   </div>
   <div class="row">
@@ -96,22 +97,7 @@
       </div>
       
       
-      
-      <div class="col-xs-12 col-sm-12 col-md-12">
-          <div class="form-group">
-              <strong>Artist : </strong>         
-
-                 @if ($song_data['song']->artists) 
-                     @foreach( $song_data['song']->artists as $key => $artist)                       
-                        @if ($song_data['artists']) 
-                        {{$song_data['artists'][$artist]}}
-                             {{ $loop->last ? '' : ', ' }}
-                        @endif  
-                    @endforeach 
-                @endif  
-
-          </div>
-      </div>
+    
     
 
       <div class="col-xs-12 col-sm-12 col-md-12">

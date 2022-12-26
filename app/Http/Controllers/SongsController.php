@@ -36,29 +36,17 @@ class SongsController extends Controller
     public function index()
     {
    
-      // \DB::enableQueryLog();
-
-    /*  $songs = Songs::leftjoin('music_directors', 'music_directors.id', '=', 'songs.music_directors')
-        ->leftjoin('singers', 'singers.id', '=', 'songs.singers')
-        ->leftjoin('movies', 'movies.id', '=', 'songs.movies')
-        ->leftjoin('lyricists', 'lyricists.id', '=', 'songs.lyricists')
-        ->leftjoin('artists', 'artists.id', '=', 'songs.artists') 
-        ->orderBy('songs.id', 'desc')
-        ->select(['songs.id', 'songs.name','music_directors.name as music_directors', 'singers.name as singers', 'movies.name as movies', 'lyricists.name as lyricists', 'artists.name as artists'])
-        ->paginate(5);  */  
+      // \DB::enableQueryLog();       
         
-        
-        $songs = Songs::leftjoin('movies', 'movies.id', '=', 'songs.movies')             
+        $songs = Songs::leftjoin('movies', 'movies.id', '=', 'songs.movies')            
         ->orderBy('songs.id', 'desc')
         ->select(['songs.*', 'movies.id as movies_id', 'movies.name as movies_name', 'movies.year'])
         ->paginate(5);
         
         $songs_data['songs'] = $songs;
-        $songs_data['music_directors'] = MusicDirectors::all();
-        $songs_data['singers'] = Singers::all();
-        $songs_data['lyricists'] = Lyricists::all();
         $songs_data['artists'] = Artists::all();
-              
+        $songs_data['singers'] = Singers::all();
+        $songs_data['lyricists'] = Lyricists::all();              
              
         // dd($songs->toArray()); 
         // dd(\DB::getQueryLog());
@@ -77,7 +65,11 @@ class SongsController extends Controller
         $song_data['singers']            = Singers::pluck('name','id');
         $song_data['movies']             = Movies::pluck('name','id');
         $song_data['lyricists']          = Lyricists::pluck('name','id');
-        $song_data['artists']            = Artists::pluck('name','id'); 
+        
+        $song_data['singers']            = Artists::where('singer',1)->pluck('name','id'); 
+        $song_data['lyricists']          = Artists::where('lyricist',1)->pluck('name','id'); 
+        $song_data['music_directors']    = Artists::where('music_director',1)->pluck('name','id');  
+
         return view('songs.create', compact('song_data'));
     }
 
@@ -96,7 +88,6 @@ class SongsController extends Controller
             'singers'=>'required',
             'movies'=>'required',            
             'lyricists'=>'required',
-            'artists'=>'required',
             'lyrics_tamil'=>'required'
         ]);      
         
@@ -117,11 +108,12 @@ class SongsController extends Controller
 
        
         $song_data['song']               = $song;
-        $song_data['music_directors']    = MusicDirectors::pluck('name','id');
-        $song_data['singers']            = Singers::pluck('name','id');
         $song_data['movies']             = Movies::pluck('name', 'id');
-        $song_data['lyricists']          = Lyricists::pluck('name','id');
         $song_data['artists']            = Artists::pluck('name','id'); 
+
+        $song_data['singers']            = Artists::where('singer',1)->pluck('name','id'); 
+        $song_data['lyricists']          = Artists::where('lyricist',1)->pluck('name','id'); 
+        $song_data['music_directors']    = Artists::where('music_director',1)->pluck('name','id'); 
     
         return view('songs.show',compact('song_data'));
     }
@@ -138,11 +130,11 @@ class SongsController extends Controller
         $song = Songs::find($id);       
         
         $song_data['songs']              = $song;
-        $song_data['music_directors']    = MusicDirectors::pluck('name','id');
-        $song_data['singers']            = Singers::pluck('name','id');
         $song_data['movies']             = Movies::pluck('name','id');
-        $song_data['lyricists']          = Lyricists::pluck('name','id');
-        $song_data['artists']            = Artists::pluck('name','id');  
+
+        $song_data['singers']            = Artists::where('singer',1)->pluck('name','id'); 
+        $song_data['lyricists']          = Artists::where('lyricist',1)->pluck('name','id'); 
+        $song_data['music_directors']    = Artists::where('music_director',1)->pluck('name','id');        
 
         return view('songs.edit',compact('song_data'));
     }
@@ -161,8 +153,7 @@ class SongsController extends Controller
             'music_directors'=>'required',
             'singers'=>'required',
             'movies'=>'required',            
-            'lyricists'=>'required',
-            'artists'=>'required',
+            'lyricists'=>'required',            
             'lyrics_tamil'=>'required'
           ]);
 

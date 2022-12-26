@@ -1,6 +1,6 @@
 @extends('layouts.songs')
 @section('content')
-
+<div class="container-fluid">
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">              
@@ -12,15 +12,20 @@
                 <i class="fa fa-table"></i> Edit Movie
             </li>
         </ol>
+
+        <div class="pull-right">
+                <a class="btn btn-primary" href="{{ url()->previous() }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+            </div>
     </div>
 </div>
 
-  <div class="row">
+  <div class="row mt-4">
   <div class="col-md-12">
       {{ Form::model($movie, ['route' => ['movies.update', $movie->id], 'method'=>'PATCH', 'enctype'=>'multipart/form-data' ]) }}
         @include('movies.form_master')
       {{ Form::close() }}
     </div>
   </div>
+</div> 
 
 @endsection

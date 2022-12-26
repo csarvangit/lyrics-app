@@ -32,8 +32,12 @@ class MusicDirectorsController extends Controller
      */
     public function index()
     {
-        $music_directors = MusicDirectors::paginate(8);
+       // $music_directors = MusicDirectors::paginate(8);
+
+        $music_directors = Artists::where('music_director', 1)->paginate(8);
+
         return view('music-directors.index', compact('music_directors'));
+        
     }
 
     /**

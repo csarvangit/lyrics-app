@@ -88,10 +88,14 @@ class MoviesController extends Controller
         ->paginate(10);
         
         $songs_data['songs'] = $songs;
-        $songs_data['music_directors'] = MusicDirectors::all();
-        $songs_data['singers'] = Singers::all();
-        $songs_data['lyricists'] = Lyricists::all();
+       // $songs_data['music_directors'] = MusicDirectors::all();
+       // $songs_data['singers'] = Singers::all();
+       // $songs_data['lyricists'] = Lyricists::all();
         $songs_data['artists'] = Artists::all(); 
+
+        $songs_data['singers']            = Artists::where('singer',1)->pluck('name','id'); 
+        $songs_data['lyricists']          = Artists::where('lyricist',1)->pluck('name','id'); 
+        $songs_data['music_directors']    = Artists::where('music_director',1)->pluck('name','id');  
     
         return view('movies.show',compact('songs_data'));
         

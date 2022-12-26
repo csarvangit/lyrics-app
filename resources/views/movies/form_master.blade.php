@@ -12,7 +12,7 @@
       <div class="col-sm-4">
         {{ Form::label('name', 'Movie Name') }}
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-5">
         <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
           {{ Form::text('name', NULL, ['class' =>'form-control', 'id'=>'name', 'placeholder'=>'Movie Name']) }}
           {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
@@ -25,7 +25,7 @@
       <div class="col-sm-4">
       {{ Form::label('year', 'Year') }}
       </div>
-      <div class="col-sm-8">    
+      <div class="col-sm-5">    
   
       <div class="form-group {{ $errors->has('year') ? 'has-error' : ''}}">
         {{ Form::selectYear('year', 1970, date('Y'), $movie->year ?? date('Y'), ['class' =>'form-control form-select','id'=>'year', 'placeholder'=>'Please Select Year']) }}
@@ -58,8 +58,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      {{ Form::button(isset($movie)? 'Update' : 'Save' , ['class'=>'btn btn-success pull-right', 'type'=>'submit']) }}
+    <div class="form-group text-center pt-3 pb-5">
+      {{ Form::button(isset($movie)? 'Update Movie' : 'Save Movie' , ['class'=>'btn btn-success', 'type'=>'submit']) }}
     </div>
   </div>
 </div>
