@@ -79,21 +79,15 @@ class MoviesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        
+    {        
         $songs = Songs::leftjoin('movies', 'movies.id', '=', 'songs.movies')                  
         ->orderBy('songs.id', 'desc')
         ->select(['songs.*', 'movies.id as movies_id', 'movies.name as movies_name', 'movies.year'])
         ->where('songs.movies', '=', $id)  
         ->paginate(10);
         
-        $songs_data['songs'] = $songs;
-       // $songs_data['music_directors'] = MusicDirectors::all();
-       // $songs_data['singers'] = Singers::all();
-       // $songs_data['lyricists'] = Lyricists::all();
-        $songs_data['artists'] = Artists::all(); 
-
-        $songs_data['singers']            = Artists::where('singer',1)->pluck('name','id'); 
+        $songs_data['songs'] = $songs;  
+       
         $songs_data['lyricists']          = Artists::where('lyricist',1)->pluck('name','id'); 
         $songs_data['music_directors']    = Artists::where('music_director',1)->pluck('name','id');  
     
@@ -129,8 +123,15 @@ class MoviesController extends Controller
           
           $movies['name'] = $request->name;
           $movies['year'] = $request->year;
+
+          $movie_edit = Movies::find($id);       
           
           if( $request->image_path ){
+
+            if(File::exists(public_path('uploads/movies/'.$movie_edit->image_path))){
+                File::delete(public_path('uploads/movies/'.$movie_edit->image_path));
+            }
+
             $fileName = time().'.'.$request->image_path->extension();  
      
             $request->image_path->move(public_path('uploads/movies'), $fileName);    

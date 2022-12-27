@@ -19,7 +19,7 @@
       <!-- /.row -->
     @if ($message = Session::get('success'))
       <div class="alert alert-success">
-          <p>{{ $message }}</p>
+            <b>{{ $message }}</b>
       </div>
     @endif
 
@@ -48,13 +48,10 @@
                                 <td>{{ $songs->movies_name }}</td>
                                 <td>                 
                                 @if ($songs->music_directors) 
-                                    @foreach( $songs->music_directors as $key => $md)
-                              
-                                        @if ($songs_data['artists']) 
-                                            {{$songs_data['artists'][$md-1]->name}}
-
+                                    @foreach( $songs->music_directors as $key => $music_director)                              
+                                        @if ($songs_data['music_directors']) 
+                                            {{$songs_data['music_directors'][$music_director] }}
                                             {{ $loop->last ? '' : ', ' }}
-
                                          @endif  
                                      @endforeach 
                                 @endif 

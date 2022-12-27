@@ -43,10 +43,9 @@ class SongsController extends Controller
         ->select(['songs.*', 'movies.id as movies_id', 'movies.name as movies_name', 'movies.year'])
         ->paginate(5);
         
-        $songs_data['songs'] = $songs;
-        $songs_data['artists'] = Artists::all();
-        $songs_data['singers'] = Singers::all();
-        $songs_data['lyricists'] = Lyricists::all();              
+        $songs_data['songs'] = $songs;      
+    
+        $songs_data['music_directors']    = Artists::where('music_director',1)->pluck('name','id');  
              
         // dd($songs->toArray()); 
         // dd(\DB::getQueryLog());
@@ -61,11 +60,9 @@ class SongsController extends Controller
      */
     public function create()
     {
-        $song_data['music_directors']    = MusicDirectors::pluck('name','id');
-        $song_data['singers']            = Singers::pluck('name','id');
-        $song_data['movies']             = Movies::pluck('name','id');
-        $song_data['lyricists']          = Lyricists::pluck('name','id');
-        
+       
+        $song_data['movies']             = Movies::pluck('name','id');   
+
         $song_data['singers']            = Artists::where('singer',1)->pluck('name','id'); 
         $song_data['lyricists']          = Artists::where('lyricist',1)->pluck('name','id'); 
         $song_data['music_directors']    = Artists::where('music_director',1)->pluck('name','id');  
@@ -81,7 +78,6 @@ class SongsController extends Controller
      */
     public function store(Request $request)
     {   
-
         $this->validate($request, [
             'name'=>'required',
             'music_directors'=>'required',
@@ -104,12 +100,10 @@ class SongsController extends Controller
      */
     public function show($id)
     {        
-       $song = Songs::find($id);
-
+        $song = Songs::find($id);
        
         $song_data['song']               = $song;
         $song_data['movies']             = Movies::pluck('name', 'id');
-        $song_data['artists']            = Artists::pluck('name','id'); 
 
         $song_data['singers']            = Artists::where('singer',1)->pluck('name','id'); 
         $song_data['lyricists']          = Artists::where('lyricist',1)->pluck('name','id'); 
@@ -125,8 +119,7 @@ class SongsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-       
+    {       
         $song = Songs::find($id);       
         
         $song_data['songs']              = $song;
@@ -178,6 +171,6 @@ class SongsController extends Controller
         }
 
         $song->delete();
-        return redirect()->route('songs.index')->with('success','Song lyrics was successfully deleted!');
+        return redirect()->route('songs.index')->with('success','Song was successfully deleted!');
     }
 }

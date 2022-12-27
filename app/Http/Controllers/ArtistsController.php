@@ -125,7 +125,13 @@ class ArtistsController extends Controller
           $artist['singer'] = $request->singer ? $request->singer : false;
           $artist['music_director'] = $request->music_director ? $request->music_director : false;
           
+          $artist_edit = Artists::find($id);
+
           if( $request->image_path ){
+            if(File::exists(public_path('uploads/artists/'.$artist_edit->image_path))) {
+                File::delete(public_path('uploads/artists/'.$artist_edit->image_path));
+            }
+            
             $fileName = time().'.'.$request->image_path->extension();  
      
             $request->image_path->move(public_path('uploads/artists'), $fileName);    
