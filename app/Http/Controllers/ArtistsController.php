@@ -28,7 +28,7 @@ class ArtistsController extends Controller
      */
     public function index()
     {
-        $artists = Artists::paginate(8);
+        $artists = Artists::where('artist', 1)->paginate(8);
         $allow_delete = true;
         return view('artists.index', compact('artists', 'allow_delete'));
     }
@@ -53,21 +53,27 @@ class ArtistsController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'role' => 'required',
+            'image_path' => 'required',
         ]);
 
-        $fileName = time().'.'.$request->image_path->extension();  
-     
-        $request->image_path->move(public_path('public/uploads/artists'), $fileName);
+        if( $request->image_path ){ 
+            $fileName = time().'.'.$request->image_path->extension();  
+        
+            $request->image_path->move(public_path('uploads/artists'), $fileName);
+            $artist['image_path'] = $fileName;
+        }
  
         $artist['name'] = $request->name;
-        $artist['lyricist'] = $request->lyricist ? $request->lyricist : false ;
-        $artist['singer'] = $request->singer ? $request->singer : false;
-        $artist['music_director'] = $request->music_director ? $request->music_director : false;
+        
+        $artist['artist'] = $request->role['artist'] ?? false ;
+        $artist['lyricist'] = $request->role['lyricist'] ?? false ;
+        $artist['singer'] = $request->role['singer'] ?? false;
+        $artist['music_director'] = $request->role['music_director'] ?? false;          
+       
         $artist['bio'] = $request->bio ? $request->bio : NULL;
         $artist['awards'] = $request->awards ? $request->awards : NULL;
-        $artist['youtube_url'] = $request->youtube_url ? $request->youtube_url : NULL;
-
-        $artist['image_path'] = $fileName;
+        $artist['youtube_url'] = $request->youtube_url ? $request->youtube_url : NULL;        
 
         Artists::create($artist);
 
@@ -118,23 +124,25 @@ class ArtistsController extends Controller
     {
         $this->validate($request,[
             'name' => 'required',
+            'role' => 'required',
           ]);
            
           $artist['name'] = $request->name;
-          $artist['lyricist'] = $request->lyricist ? $request->lyricist : false ;
-          $artist['singer'] = $request->singer ? $request->singer : false;
-          $artist['music_director'] = $request->music_director ? $request->music_director : false;
+          $artist['artist'] = $request->role['artist'] ?? false ;
+          $artist['lyricist'] = $request->role['lyricist'] ?? false ;
+          $artist['singer'] = $request->role['singer'] ?? false;
+          $artist['music_director'] = $request->role['music_director'] ?? false;  
           
           $artist_edit = Artists::find($id);
 
-          if( $request->image_path ){
-            if(File::exists(public_path('public/uploads/artists/'.$artist_edit->image_path))) {
-                File::delete(public_path('public/uploads/artists/'.$artist_edit->image_path));
+          if( $request->image_path ){ 
+            if(File::exists(public_path('uploads/artists/'.$artist_edit->image_path))) {
+                File::delete(public_path('uploads/artists/'.$artist_edit->image_path));
             }
             
             $fileName = time().'.'.$request->image_path->extension();  
      
-            $request->image_path->move(public_path('public/uploads/artists'), $fileName);    
+            $request->image_path->move(public_path('uploads/artists'), $fileName);    
             
             $artist['image_path'] = $fileName;  
           }           
@@ -178,8 +186,8 @@ class ArtistsController extends Controller
     {
         $artist = Artists::find($id);       
 
-        if(File::exists(public_path('public/uploads/artists/'.$artist->image_path))){
-            File::delete(public_path('public/uploads/artists/'.$artist->image_path));
+        if(File::exists(public_path('uploads/artists/'.$artist->image_path))){
+            File::delete(public_path('uploads/artists/'.$artist->image_path));
         }
 
         $artist->delete();

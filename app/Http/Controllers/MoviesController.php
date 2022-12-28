@@ -57,15 +57,18 @@ class MoviesController extends Controller
         $request->validate([
             'name' => 'required',
             'year' => 'required',
+            'image_path' => 'required',
         ]);
 
-        $fileName = time().'.'.$request->image_path->extension();  
-     
-        $request->image_path->move(public_path('public/uploads/movies'), $fileName);
- 
+        if( $request->image_path ){
+            $fileName = time().'.'.$request->image_path->extension();  
+        
+            $request->image_path->move(public_path('uploads/movies'), $fileName);
+            $movies['image_path'] = $fileName;
+        }    
         $movies['name'] = $request->name;
         $movies['year'] = $request->year;
-        $movies['image_path'] = $fileName;
+        
 
         Movies::create($movies);
 
@@ -128,13 +131,13 @@ class MoviesController extends Controller
           
           if( $request->image_path ){
 
-            if(File::exists(public_path('public/uploads/movies/'.$movie_edit->image_path))){
-                File::delete(public_path('public/uploads/movies/'.$movie_edit->image_path));
+            if(File::exists(public_path('uploads/movies/'.$movie_edit->image_path))){
+                File::delete(public_path('uploads/movies/'.$movie_edit->image_path));
             }
 
             $fileName = time().'.'.$request->image_path->extension();  
      
-            $request->image_path->move(public_path('public/uploads/movies'), $fileName);    
+            $request->image_path->move(public_path('uploads/movies'), $fileName);    
             
             $movies['image_path'] = $fileName;  
           }  
@@ -152,8 +155,8 @@ class MoviesController extends Controller
     {
         $movie = Movies::find($id);
     
-        if(File::exists(public_path('public/uploads/movies/'.$movie->image_path))){
-            File::delete(public_path('public/uploads/movies/'.$movie->image_path));
+        if(File::exists(public_path('uploads/movies/'.$movie->image_path))){
+            File::delete(public_path('uploads/movies/'.$movie->image_path));
         }
         $movie->delete();
         return redirect()->route('movies.index')->with('success','Movie was successfully deleted!');

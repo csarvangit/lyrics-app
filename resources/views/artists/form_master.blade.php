@@ -3,7 +3,7 @@
           <b>{{ $message }}</b>
       </div>
     @endif
-
+  
 <div class="row">
   <div class="col-md-12">
 
@@ -24,19 +24,24 @@
       <div class="col-sm-3">
         {{ Form::label('role', 'Artist Role') }}
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-8 {{ $errors->has('role') ? 'has-error' : ''}}">   
+        <div class="form-group">
+           {{ Form::label('artist', 'Artist') }}
+            {{ Form::checkbox('role[artist]', '1', $artist->artist ?? null, ['id'=>'artist']) }}
+        </div>
         <div class="form-group">
            {{ Form::label('lyricist', 'Lyricist') }}
-            {{ Form::checkbox('lyricist', '1', null, ['id'=>'lyricist']) }}
+            {{ Form::checkbox('role[lyricist]', '1', $artist->lyricist ?? null, ['id'=>'lyricist']) }}
         </div>
         <div class="form-group">
            {{ Form::label('singer', 'Singer') }}
-            {{ Form::checkbox('singer', '1', null, ['id'=>'singer']) }}
+            {{ Form::checkbox('role[singer]', '1', $artist->singer ?? null, ['id'=>'singer']) }}
         </div>
         <div class="form-group">
            {{ Form::label('music_director', 'Music Director') }}
-            {{ Form::checkbox('music_director', '1', null, ['id'=>'music_director']) }}
+            {{ Form::checkbox('role[music_director]', '1', $artist->music_director ?? null, ['id'=>'music_director']) }}
         </div>
+        {!! $errors->first('role', '<p class="help-block">:message</p>') !!}
       </div>
     </div>
 
