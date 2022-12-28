@@ -166,8 +166,8 @@ class SongsController extends Controller
     {        
         $song = Songs::find($id);           
 
-        if(File::exists(public_path('uploads/songs/'.$song->image_path))){
-            File::delete(public_path('uploads/songs/'.$song->image_path));
+        if(File::exists(public_path('public/uploads/songs/'.$song->image_path))){
+            File::delete(public_path('public/uploads/songs/'.$song->image_path));
         }
 
         $song->delete();

@@ -45,7 +45,7 @@
         </div>
         @php
         if( isset($movie) ) {
-           $img_path =  URL::to('/uploads/movies/' .  $movie->image_path) ?? null;
+           $img_path =  URL::to('/public/uploads/movies/' .  $movie->image_path) ?? null;
         } else {  
            $img_path = null;
         }

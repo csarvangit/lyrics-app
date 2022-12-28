@@ -40,7 +40,7 @@
                   
                     @foreach( $artists as $key => $value)
                     <div class="col-lg-3 mb-4">
-                        <div class="bg-column" style="background-image: url('{{ URL::to('/uploads/artists/' .  $value->image_path)  }}');">
+                        <div class="bg-column" style="background-image: url('{{ URL::to('/public/uploads/artists/' .  $value->image_path)  }}');">
                        
                             <a href="{{route('artists.show', $value->id)}}" target="_self">
                                 <div class="bg-title">{{ $value->name }}</div>      

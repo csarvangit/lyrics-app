@@ -59,7 +59,7 @@ class SingersController extends Controller
 
         $fileName = time().'.'.$request->image_path->extension();  
      
-        $request->image_path->move(public_path('uploads/singers'), $fileName);
+        $request->image_path->move(public_path('public/uploads/singers'), $fileName);
  
         $singers['name'] = $request->name;
         $singers['image_path'] = $fileName;
@@ -128,7 +128,7 @@ class SingersController extends Controller
           if( $request->image_path ){
             $fileName = time().'.'.$request->image_path->extension();  
      
-            $request->image_path->move(public_path('uploads/singers'), $fileName);    
+            $request->image_path->move(public_path('public/uploads/singers'), $fileName);    
             
             $singers['image_path'] = $fileName;  
           }                   
@@ -147,8 +147,8 @@ class SingersController extends Controller
     {
         $singer = Singers::find($id);
         
-        if(File::exists(public_path('uploads/singers/'.$singer->image_path))){
-            File::delete(public_path('uploads/singers/'.$singer->image_path));
+        if(File::exists(public_path('public/uploads/singers/'.$singer->image_path))){
+            File::delete(public_path('public/uploads/singers/'.$singer->image_path));
         }
         
         $singer->delete();

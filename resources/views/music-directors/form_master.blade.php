@@ -45,7 +45,7 @@
 
         @php
         if( isset($music_directors) ) {
-           $img_path =  URL::to('/uploads/music-directors/' .  $music_directors->image_path) ?? null;
+           $img_path =  URL::to('/public/uploads/music-directors/' .  $music_directors->image_path) ?? null;
         } else {  
            $img_path = null;
         }

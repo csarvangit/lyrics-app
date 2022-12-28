@@ -52,7 +52,7 @@
 
         @php
         if( isset($artist) ) {
-           $img_path =  URL::to('/uploads/artists/' .  $artist->image_path) ?? null;
+           $img_path =  URL::to('/public/uploads/artists/' .  $artist->image_path) ?? null;
         } else {  
            $img_path = null;
         }

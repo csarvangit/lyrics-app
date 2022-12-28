@@ -57,7 +57,7 @@ class ArtistsController extends Controller
 
         $fileName = time().'.'.$request->image_path->extension();  
      
-        $request->image_path->move(public_path('uploads/artists'), $fileName);
+        $request->image_path->move(public_path('public/uploads/artists'), $fileName);
  
         $artist['name'] = $request->name;
         $artist['lyricist'] = $request->lyricist ? $request->lyricist : false ;
@@ -128,13 +128,13 @@ class ArtistsController extends Controller
           $artist_edit = Artists::find($id);
 
           if( $request->image_path ){
-            if(File::exists(public_path('uploads/artists/'.$artist_edit->image_path))) {
-                File::delete(public_path('uploads/artists/'.$artist_edit->image_path));
+            if(File::exists(public_path('public/uploads/artists/'.$artist_edit->image_path))) {
+                File::delete(public_path('public/uploads/artists/'.$artist_edit->image_path));
             }
             
             $fileName = time().'.'.$request->image_path->extension();  
      
-            $request->image_path->move(public_path('uploads/artists'), $fileName);    
+            $request->image_path->move(public_path('public/uploads/artists'), $fileName);    
             
             $artist['image_path'] = $fileName;  
           }           
@@ -178,8 +178,8 @@ class ArtistsController extends Controller
     {
         $artist = Artists::find($id);       
 
-        if(File::exists(public_path('uploads/artists/'.$artist->image_path))){
-            File::delete(public_path('uploads/artists/'.$artist->image_path));
+        if(File::exists(public_path('public/uploads/artists/'.$artist->image_path))){
+            File::delete(public_path('public/uploads/artists/'.$artist->image_path));
         }
 
         $artist->delete();

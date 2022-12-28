@@ -15,19 +15,19 @@
     <title>{{ config('app.name', 'SongsDB') }}</title>
 
     <!-- Bootstrap Core CSS 
-    <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet">  -->
+    <link href="{{ asset('public/css/bootstrap.min.css')}}" rel="stylesheet">  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" >
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     <!-- Custom CSS -->
-    <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet"> 
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/sb-admin.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    <link href="{{ asset('font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     
 </head>
 
@@ -108,7 +108,7 @@
 
     <!-- Jquery -->
 
-    <script src="{{ asset('js/jquery.js')}}"></script>
+    <script src="{{ asset('public/js/jquery.js')}}"></script>
      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 
     <!-- Bootstrap Core JavaScript 
@@ -119,7 +119,7 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
     <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
-    <script src="{{ asset('js/script.js')}}"></script>
+    <script src="{{ asset('public/js/script.js')}}"></script>
 </body>
 
 </html>

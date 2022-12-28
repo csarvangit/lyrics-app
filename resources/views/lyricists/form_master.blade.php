@@ -45,7 +45,7 @@
         </div>
         @php
         if( isset($lyricist) ) {
-           $img_path =  URL::to('/uploads/lyricists/' .  $lyricist->image_path) ?? null;
+           $img_path =  URL::to('/public/uploads/lyricists/' .  $lyricist->image_path) ?? null;
         } else {  
            $img_path = null;
         }

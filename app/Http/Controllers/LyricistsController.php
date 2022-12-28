@@ -58,7 +58,7 @@ class LyricistsController extends Controller
 
         $fileName = time().'.'.$request->image_path->extension();  
      
-        $request->image_path->move(public_path('uploads/lyricists'), $fileName);
+        $request->image_path->move(public_path('public/uploads/lyricists'), $fileName);
  
         $lyricists['name'] = $request->name;
         $lyricists['image_path'] = $fileName;
@@ -127,7 +127,7 @@ class LyricistsController extends Controller
           if( $request->image_path ){
             $fileName = time().'.'.$request->image_path->extension();  
      
-            $request->image_path->move(public_path('uploads/lyricists'), $fileName);    
+            $request->image_path->move(public_path('public/uploads/lyricists'), $fileName);    
             
             $lyricist['image_path'] = $fileName;  
           }                   
@@ -146,8 +146,8 @@ class LyricistsController extends Controller
     {
         $lyricist = Lyricists::find($id);
        
-        if(File::exists(public_path('uploads/lyricists/'.$lyricist->image_path))){
-            File::delete(public_path('uploads/lyricists/'.$lyricist->image_path));
+        if(File::exists(public_path('public/uploads/lyricists/'.$lyricist->image_path))){
+            File::delete(public_path('public/uploads/lyricists/'.$lyricist->image_path));
         }
 
         $lyricist->delete();

@@ -46,7 +46,7 @@
 
         @php
         if( isset($singer) ) {
-           $img_path =  URL::to('/uploads/singers/' .  $singer->image_path) ?? null;
+           $img_path =  URL::to('/public/uploads/singers/' .  $singer->image_path) ?? null;
         } else {  
            $img_path = null;
         }

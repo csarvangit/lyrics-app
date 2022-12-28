@@ -65,7 +65,7 @@ class MusicDirectorsController extends Controller
 
         $fileName = time().'.'.$request->image_path->extension();  
      
-        $request->image_path->move(public_path('uploads/music-directors'), $fileName);
+        $request->image_path->move(public_path('public/uploads/music-directors'), $fileName);
  
         $md['name'] = $request->name;
         $md['image_path'] = $fileName;
@@ -136,7 +136,7 @@ class MusicDirectorsController extends Controller
           if( $request->image_path ){
             $fileName = time().'.'.$request->image_path->extension();  
      
-            $request->image_path->move(public_path('uploads/music-directors'), $fileName);    
+            $request->image_path->move(public_path('public/uploads/music-directors'), $fileName);    
             
             $music_directors['image_path'] = $fileName;  
           }                   
@@ -155,8 +155,8 @@ class MusicDirectorsController extends Controller
     {
         $music_director = MusicDirectors::find($id);
 
-        if(File::exists(public_path('uploads/music-directors/'.$music_director->image_path))){
-            File::delete(public_path('uploads/music-directors/'.$music_director->image_path));
+        if(File::exists(public_path('public/uploads/music-directors/'.$music_director->image_path))){
+            File::delete(public_path('public/uploads/music-directors/'.$music_director->image_path));
         }
         $music_director->delete();
         return redirect()->route('music-directors.index')->with('success','Music Director was successfully deleted!');
